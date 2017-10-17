@@ -4,5 +4,5 @@ venv
 #Ignore compiled Python source files
 *.pyc
 
-#Ignore SQLLite database files
+#Ignore SQLite database files
 *.sqlite3
