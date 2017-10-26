@@ -3,7 +3,7 @@ MAINTAINER Dzmitry Mikhailouski <dmitry.mihailovsky@gmail.com>
 
 # Install dev/build dependencies
 RUN apt-get update && \
-    apt-get install -qy python-dev
+    apt-get install -qy python-dev libmysqlclient-dev
 
 # Activate virtual environment and install wheel support
 RUN . /appenv/bin/activate && \
