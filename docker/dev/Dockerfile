@@ -1,4 +1,4 @@
-FROM dmikhailouki/todobackend-base:latest
+FROM dmitrymihailovsky/todobackend-base:latest
 MAINTAINER Dzmitry Mikhailouski <dmitry.mihailovsky@gmail.com>
 
 # Install dev/build dependencies
