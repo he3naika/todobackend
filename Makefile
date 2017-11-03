@@ -1,11 +1,22 @@
-.PHONY: test build release
+.PHONY: test build release clean
 
 test:
-	echo "Hello"
-	echo "from make"
+	docker-compose -f docker/dev/docker-compose.yml build
+	docker-compose -f docker/dev/docker-compose.yml up agent
+	docker-compose -f docker/dev/docker-compose.yml up test
 
 build:
-	echo "Hello from build"
+	docker-compose -f docker/dev/docker-compose.yml up builder
 
 release:
-	echo "Hello from release"
+	docker-compose -f docker/release/docker-compose.yml build
+	docker-compose -f docker/release/docker-compose.yml up agent
+	docker-compose -f docker/release/docker-compose.yml run --rm app manage.py collectstatic --noinput
+	docker-compose -f docker/release/docker-compose.yml run --rm app manage.py migrate --noinput
+	docker-compose -f docker/release/docker-compose.yml up test
+
+clean:
+	docker-compose -f docker/dev/docker-compose.yml kill
+	docker-compose -f docker/dev/docker-compose.yml rm -f
+	docker-compose -f docker/release/docker-compose.yml kill
+	docker-compose -f docker/release/docker-compose.yml rm -f
